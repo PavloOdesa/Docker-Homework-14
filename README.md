@@ -17,3 +17,7 @@ ivw8ioep5lt7oy9wespu1ghj1   mysql_root_password             24 minutes ago   24 
 ks4icm9goo8ccgj6uh5pln3ar   mysql_user                      24 minutes ago   24 minutes ago
 Виправив compose file, docker-compose.yml його я прикрiпив.
 Розгорнув стек за допомогою docker stack deploy -c docker-compose.yml wordpress
+Перевiрка docker stack services wordpress
+ID             NAME                  MODE         REPLICAS   IMAGE         PORTS
+7j6risq753cg   wordpress_db          replicated   0/1        mysql:8       
+6cyyslmvm66v   wordpress_wordpress   replicated   1/1        wordpress:6   *:8000->80/tcp
