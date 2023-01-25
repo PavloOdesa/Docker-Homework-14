@@ -7,19 +7,19 @@ echo "MYSQL_DATABASE=wordpress" >> secrets.txt
 echo "MYSQL_USER=wordpress" >> secrets.txt
 echo "MYSQL_PASSWORD=wordpress" >> secrets.txt
 
-Створіть секрети за допомогою команди docker secret create:
+Створив секрети:
+echo "somewordpress" | docker secret create mysql_root_password -
+echo "wordpress" | docker secret create mysql_database -
+echo "wordpress" | docker secret create mysql_user -
+echo "wordpress" | docker secret create mysql_password -
 
-docker secret create mysql_root_password secrets.txt
-docker secret create mysql_database secrets.txt
-docker secret create mysql_user secrets.txt
-docker secret create mysql_password secrets.txt
 
 Перевiрив створеннi секрети командою docker secret ls
-ID                          NAME                  DRIVER    CREATED          UPDATED
-va8p0bcmlfipbuzoojrihkay4   mysql_database                  24 minutes ago   24 minutes ago
-ytymsdteswdv6xktsi67va3ly   mysql_password                  24 minutes ago   24 minutes ago
-ivw8ioep5lt7oy9wespu1ghj1   mysql_root_password             24 minutes ago   24 minutes ago
-ks4icm9goo8ccgj6uh5pln3ar   mysql_user                      24 minutes ago   24 minutes ago
+ID                          NAME                  DRIVER    CREATED         UPDATED
+fjcuotcehh3bpub68ercz0l8f   mysql_database                  9 minutes ago   9 minutes ago
+din6bly9pjva9crxa7wnv8d95   mysql_password                  9 minutes ago   9 minutes ago
+bu8ag6ho3e664oevb030hgyqc   mysql_root_password             9 minutes ago   9 minutes ago
+5h4muumm78nody9sdj95mwvtl   mysql_user                      9 minutes ago   9 minutes ago
 
 Виправив compose file, docker-compose.yml його я прикрiпив.
 
@@ -27,5 +27,5 @@ ks4icm9goo8ccgj6uh5pln3ar   mysql_user                      24 minutes ago   24 
 
 Перевiрка docker stack services wordpress
 ID             NAME                  MODE         REPLICAS   IMAGE         PORTS
-7j6risq753cg   wordpress_db          replicated   0/1        mysql:8       
-6cyyslmvm66v   wordpress_wordpress   replicated   1/1        wordpress:6   *:8000->80/tcp
+7j6qdfq862cg   wordpress_db          replicated   0/1        mysql:8       
+6cosslmvm77v   wordpress_wordpress   replicated   1/1        wordpress:6   *:8000->80/tcp
