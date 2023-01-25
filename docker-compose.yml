@@ -1,7 +1,9 @@
 version: "3.8"
 services:
   db:
-    image: mysql:8
+    image: amd64/mysql:8
+    volumes:
+      - db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
@@ -14,12 +16,12 @@ services:
       - mysql_user
       - mysql_password
   wordpress:
-    image: wordpress:6
+    image: amd64/wordpress:6
     ports:
       - "8000:80"
     restart: always
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER_FILE: /run/secrets/mysql_user
       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/mysql_password
       WORDPRESS_DB_NAME_FILE: /run/secrets/mysql_database
@@ -29,12 +31,5 @@ services:
       - mysql_user
       - mysql_password
       - mysql_database
-secrets:
-  mysql_root_password:
-    external: true
-  mysql_database:
-    external: true
-  mysql_user:
-    external: true
-  mysql_password:
-    external: true
+volumes:
+  db_data: {}
